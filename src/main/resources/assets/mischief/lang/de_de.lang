@@ -1,0 +1,90 @@
+itemGroup.mischief=Mischief
+
+tile.mischief.ancient_rock.name=Antiker Stein
+tile.mischief.portal_frame.name=Portalrahmen
+tile.mischief.ancient_rock_stairs.name=Antike Steinstufen
+tile.mischief.carving_table.name=Bearbeitungstisch
+tile.mischief.pedestral_rock.name=Podest
+
+tile.mischief.totem_rock.name=Steintotem
+tile.mischief.totem_rock.cursed.name=§4Verfluchtes Steintotem
+tile.mischief.totem_rock.enchanted.name=§bVerzaubertes Steintotem
+
+tile.mischief.totem_clay.name=Lehmtotem
+tile.mischief.totem_clay.cursed.name=§4Verfluchtes Lehmtotem
+tile.mischief.totem_clay.enchanted.name=§bVerzaubertes Lehmtotem
+
+item.mischief.medallion_basic.name=Stinknormales Amulett
+item.mischief.medallion_basic.cursed.name=§4Verfluchtes Amulett
+item.mischief.medallion_basic.enchanted.name=§bVerzaubertes Amulet
+
+item.mischief.charm_moon.name=Mondanhänger
+item.mischief.charm_moon.cursed.name=§4Verfluchter Mondanhänger
+item.mischief.charm_moon.enchanted.name=§bVerzauberter Mondanhänger
+item.mischief.charm_sun.name=Sonnenanhänger
+item.mischief.charm_sun.cursed.name=§4Verfluchter Sonnenanhänger
+item.mischief.charm_sun.enchanted.name=§bVerzauberter Sonnenanhänger
+
+item.mischief.powder_experimental.name=Experimentelles Pülverchen
+item.mischief.powder_experimental.cursed.name=§4Verfluchtes experimentelles Pülverchen
+item.mischief.powder_experimental.enchanted.name=§bVerzaubertes experimentelles Pülverchen
+
+item.mischief.powder_creative.name=§5Kreatives Pülverchen
+item.mischief.powder_creative.cursed.name=§4Verfluchtes Kreatives Pülverchen
+item.mischief.powder_creative.enchanted.name=§bVerzaubertes Kreatives Pülverchen
+item.mischief.medallion_creative.name=§5Kreatives Amulett
+item.mischief.medallion_creative.cursed.name=§4Verfluchtes Kreatives Amulett
+item.mischief.medallion_creative.enchanted.name=§bVerzaubertes Kreatives Amulett
+item.mischief.charm_creative.name=§5Kreativanhänher
+item.mischief.charm_creative.cursed.name=§4Verfluchter Kreativanhänher
+item.mischief.charm_creative.enchanted.name=§bVerzauberter Kreativanhänher
+tile.mischief.totem_creative.name=§5Kreatives Totem
+tile.mischief.totem_creative.cursed.name=§4Verfluchtes Kreatives Totem
+tile.mischief.totem_creative.enchanted.name=§bVerzaubertes Kreatives Totem
+
+item.mischief.medallion_basic_core.name=Stinknormaler Amulettkern
+item.mischief.charm_moon_core.name=Mondanhänger Kern
+item.mischief.charm_sun_core.name=Sonnenanhänger Kern
+
+item.mischief.roots.name=Wurzeln
+item.mischief.crystal.name=Irgendsoein Kristall
+item.mischief.dragon_scale.name=Drachenschuppe
+item.mischief.chaos_essence.name=Essenz des Chaos
+item.mischief.bottled_shade.name=Schatten in einer Flasche
+item.mischief.reality_shard.name=Stück des Himmels
+
+message.mischief.curse_target=Du wurdest verflucht!
+message.mischief.curse_caster=Du hast jemanden verflucht!
+message.mischief.curse_not_existing=Es existiert kein Fluch mit dem Namen '%s'
+message.mischief.select_itemstack=Nimm ein Item in die Hand
+message.mischief.item_cant_use_curse=%s kann den Fluch '%s' nicht benutzen
+message.mischief.coma=%s scheint ein wenig weggetreten
+
+message.mischief.select_powder=Nur Pulver sind tarnbar
+message.mischief.does_not_exist=%s existiert nicht
+message.mischief.cooldown=Kühlrunter: %s
+
+
+tooltip.mischief.rank_up_to=§6Kann Flüche bis Rank %s benutzen
+tooltip.mischief.no_deco=Nicht zur Dekoration benutzen
+tooltip.mischief.spell=Fluch: %s
+tooltip.mischief.power=Macht: %s
+tooltip.mischief.effect=Effekt: 
+tooltip.mischief.range=Reichweite: %s
+tooltip.mischief.required_energy=Benötiges Chi: %s
+tooltip.mischief.effect_count=%s effects
+tooltip.mischief.caster=Fluchsprecher: %s
+tooltip.mischief.target=Ziel: %s
+tooltip.mischief.unknown=Unbekannt
+
+tooltip.hwyla.carving_assemble=2x2 platzieren un Rechts-Klicken
+tooltip.hwyla.assembled=Montiert
+
+gui.jei.category.carving=Formen
+gui.jei.category.spell=Verfluchen
+
+effect.multi=Jeder Effekt
+attribute.name.multi=Diverse Attribute
+
+entity.left_body.name=Leere Hülle
+entity.carving_block.name=Block

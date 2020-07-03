@@ -1,0 +1,44 @@
+{
+	"__comment": "Designed by Possible_triangle with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "mischief:blocks/basalt",
+		"texture": "mischief:blocks/basalt"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Bottom",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 4, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 12, 16, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 12, 16, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 12, 16, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 12, 16, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Mid",
+			"from": [ 2, 4, 2 ],
+			"to": [ 16, 12, 16 ],
+			"faces": {
+				"north": { "uv": [ 0, 4, 14, 12 ], "texture": "#texture" },
+				"west": { "uv": [ 2, 4, 16, 12 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Top",
+			"from": [ 0, 12, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"north": { "uv": [ 0, 0, 16, 4 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 0, 16, 4 ], "texture": "#texture" },
+				"west": { "uv": [ 0, 0, 16, 4 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 0, 16, 4 ], "texture": "#texture" }
+			}
+		}
+	]
+}

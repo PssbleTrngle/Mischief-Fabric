@@ -1,0 +1,6 @@
+{
+	"parent": "mischief:block/totem/totem_clay",
+	"textures": {
+		"eyes": "mischief:blocks/totem_cursed"
+	}
+}

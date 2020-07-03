@@ -1,0 +1,8 @@
+{
+  "parent": "mischief:block/pedestal",
+  "textures": {
+    "texture": "block/purpur_block",
+    "pillar": "block/purpur_pillar",
+    "particle": "block/purpur_block"
+  }
+}

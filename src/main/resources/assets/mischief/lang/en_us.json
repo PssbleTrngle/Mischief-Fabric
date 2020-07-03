@@ -1,0 +1,104 @@
+{
+	"itemGroup.mischief": "Mischief",
+
+	"mischief.spell.effect": "Effect",
+	"mischief.spell.travel": "Travel",
+	"mischief.spell.drop": "Drop",
+	"mischief.spell.gravity": "Zero Gravity",
+	"mischief.spell.shuffle": "Shuffle",
+	"mischief.spell.inferno": "Inferno",
+	"mischief.spell.multi_effect": "Multi",
+	"mischief.spell.swap": "Swap",
+	"mischief.spell.bounce": "Bounce",
+	"mischief.spell.theft": "Theft",
+	
+	"mischief.spell.shield": "Shield",
+	"mischief.spell.vacuum": "Vacuum",
+	"mischief.spell.locate": "Locate",
+	"mischief.spell.mirror": "Mirror",
+	"mischief.spell.break": "Break",
+
+	"multiblock.mischief:altar.name": "Altar",
+	"multiblock.mischief:entropy.name": "Entropy",
+	"multiblock.mischief:well.name": "Well",
+
+	"mischief.tooltip.cursed": "§4Cursed %s",
+	"mischief.tooltip.blessed": "§bBlessed %s",
+	
+	"block.mischief.marble": "Marble",
+	"block.mischief.basalt": "Basalt",
+	"block.mischief.crystal": "Crystal",
+
+	"block.mischief.carving_table": "Carving Table",
+	"block.mischief.pedestal_basalt": "Basalt Pedestal",
+	"block.mischief.pedestal_nether": "Nether Pedestal",
+	"block.mischief.pedestal_quartz": "Quartz Pedestal",
+	"block.mischief.pedestal_purpur": "Purpur Pedestal",
+
+	"block.mischief.totem": "%s Totem",	
+	"block.mischief.dreamcatcher": "%s Dreamcatcher",
+	"item.mischief.amulet": "%s Amulet",
+	"item.mischief.charm": "Charm of the %s",
+	"item.mischief.powder": "%s Powder",
+	
+	"item.mischief.crystal": "Some Crystal",
+	"item.mischief.bottled_shade": "Bottled Shade",
+
+	"command.usage.select_item": "Select an Item!",
+	"command.usage.not_curseable": "%s cannot be cursed!",
+	"command.usage.curse_not_existing": "The spell '%s' does not exist!",
+	"command.usage.up_to_rank": "%s can only use curses up to rank %s! (Curse rank: %s)",
+	"command.usage.cannot_use_curse": "%s cannot use the spell '%s'",
+	"command.usage.cursed": "You cursed %s with '%s'",
+
+	"mischief.error": "Error! Report to mod author of mischief",
+
+	"mischief.message.chi_info": "§bChi Data for %s\nCurrent: %s\nStamina: %s\nMaximal Stamina: %s\nAligment: %s\nOffline Current: %s",
+
+	"mischief.locate.caster": "Created by %s",
+	"mischief.locate.source": "Connected to %s/%s",
+	"mischief.locate.unknown": "Unknown",
+	
+	"mischief.message.coma": "%s seems to be in some kind of stance",
+	
+	"mischief.tooltip.cooldown": "Cooldown: %s",
+	"mischief.tooltip.rank_up_to": "§6Can hold spells up to rank %s",
+	"mischief.tooltip.power": "Power: %s",
+	"mischief.tooltip.effect": "Effect: %s",
+	"mischief.tooltip.range": "Range: %s",
+	
+	"mischief.tooltip.effect_count": "%s effects",
+
+	"mischief.tooltip.carving_assemble": "Place 2x2 and right-click to assemble",
+	"mischief.tooltip.assembled": "%s assembled",
+
+	"effect.multi": "Every Effect",
+	"effect.multi_good": "Every Good Effect",
+	"effect.multi_bad": "Every Bad Effect",
+	"attribute.multi": "Multiple Attributes",
+	
+	"potion.prefix": "Potion of",
+	"lingering_potion.prefix": "Lingering Potion of",
+	"splash_potion.prefix": "Splash Potion of",
+	"tipped_arrow.prefix": "Arrow of",
+
+	"potion.effect.wither": "Withering",
+	"potion.effect.unluck": "Badluck",
+	"potion.effect.blindness": "Blindness",
+	"potion.effect.confusion": "Confusion",
+	"potion.effect.hunger": "Hunger",
+	"potion.effect.digSpeed": "Haste",
+	"potion.effect.digSlowDown": "Minging Fatigue",
+	"potion.effect.glowing": "Glowing",
+	"potion.effect.multi_normal": "literally Everything",
+	"potion.effect.multi_strong": "literally Everything",
+	"potion.effect.multi_good_normal": "beneficial Overflow",
+	"potion.effect.multi_good_strong": "beneficial Overflow",
+	"potion.effect.multi_bad_normal": "total Disaster",
+	"potion.effect.multi_bad_strong": "total Disaster",
+
+	"entity.left_body": "Empty Body",
+	"entity.curse_vortex": "Vortex",
+	"entity.curse_desease": "Desease",
+	"entity.carving_block": "Carving Block"
+}

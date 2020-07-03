@@ -1,37 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "mischief",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Mischief",
+  "description": "This mod aims to enable playing tricks between players in a more creative way than simply killing them.",
   "authors": [
-    "Me!"
+    "possible_triangle"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/PssbleTrngle/Mischief-Fabric",
+    "issues": "https://github.com/PssbleTrngle/Mischief-Fabric/issues"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleModKt::init"
+      "com.possible_triangle.mischief.Mischief::init"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=0.7.1",
     "fabric": "*",
     "fabric-language-kotlin": "*",
-    "minecraft": "1.15.x"
-  },
-  "suggests": {
-    "flamingo": "*"
+    "minecraft": "1.16.1"
   }
 }

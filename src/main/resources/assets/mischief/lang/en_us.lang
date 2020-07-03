@@ -1,0 +1,246 @@
+itemGroup.mischief=Mischief
+
+fluid.choco=Molten Chocolat
+
+spell.effect.name=Effect
+spell.travel.name=Travel
+spell.drop.name=Drop
+spell.zero_gravity.name=Zero Gravity
+spell.shuffle.name=Shuffle
+spell.inferno.name=Inferno
+spell.no_drop.name=No Drop
+spell.shield.name=Shield
+spell.mirror.name=Mirror
+spell.vacuum.name=Vacuum
+spell.multi_effect.name=Multi
+spell.swap.name=Swap
+spell.bounce.name=Bounce
+spell.theft.name=Theft
+spell.port.name=Port
+spell.protect.name=Protect
+
+mischief.modifier.radius_up=Doubles the radius
+mischief.modifier.radius_down=Halves the radius
+mischief.modifier.range_up=Increases the random teleportation area
+mischief.modifier.precise=Allows the use of a precise destination
+
+multiblock.altar_nether.name=Nether Altar
+multiblock.altar_purpur.name=Void Altar
+multiblock.altar_holy.name=Holy Altar
+multiblock.altar_basalt.name=Basalt Altar
+multiblock.altar_eldritch.name=Eldritch Altar
+multiblock.altar_arcane.name=Arcane Altar
+multiblock.altar_livingrock.name=Livingrock Altar
+multiblock.entropy.name=Entropy
+multiblock.chance.name=Chance
+multiblock.well.name=Well
+multiblock.tinkerer_holy.name=Holy Tinkerer
+
+tooltip.mischief.cursed=§4Cursed %s
+tooltip.mischief.blessed=§bBlessed %s
+
+tile.mischief.sugar_block.name=Block of Sugar
+tile.mischief.candy_cane.name=Candy Cane
+tile.mischief.choco_block.name=Block of Chocolat
+tile.mischief.choco_ore.name=Chocolat Ore
+tile.mischief.choco_fluid.name=Molten Chocolat
+tile.mischief.basalt.name=Basalt
+tile.mischief.crystal.name=Crystal
+
+tile.mischief.portal_frame.name=Portal Frame
+tile.mischief.basalt_stairs.name=Basalt Stairs
+tile.mischief.basalt_slab.name=Basalt Slab
+tile.mischief.carving_table.name=Carving Table
+tile.mischief.chi_interface.name=Chi Interface
+tile.mischief.chi_interface_creative.name=Creative Chi Interface
+tile.mischief.pedestral_basalt.name=Basalt Pedestral
+tile.mischief.pedestral_nether.name=Nether Pedestral
+tile.mischief.pedestral_quartz.name=Quartz Pedestral
+tile.mischief.pedestral_purpur.name=Purpur Pedestral
+
+tile.mischief.totem_basalt.name=Basalt Totem
+tile.mischief.totem_clay.name=Clay Totem
+tile.mischief.totem_crystal.name=Crystal Totem
+tile.mischief.totem_arcane.name=Arcane Totem
+tile.mischief.totem_ancient_rock.name=Ancient Totem
+tile.mischief.totem_eldritch.name=Eldritch Totem
+tile.mischief.totem_greatwood.name=Greatwood Totem
+tile.mischief.totem_silverwood.name=Silverwood Totem
+tile.mischief.totem_livingwood.name=Livingwood Totem
+tile.mischief.totem_livingrock.name=Livingrock Totem
+tile.mischief.totem_dreamwood.name=Dreamwood Totem
+
+tile.mischief.dreamcatcher_cosmic.name=Cosmic Dreamcatcher
+
+item.mischief.choco.name=Chocolat Bar
+item.mischief.candy_cane_item.name=Candy Cane
+item.mischief.multiblock_builder_creative.name=Multiblock Assembler
+item.mischief.multiblock_builder.name=Multiblock Highlighter
+
+item.mischief.dragon_scale_boots.name=Dragon Scale Boots
+item.mischief.dragon_scale_chestplate.name=Dragon Scale Chestplate
+item.mischief.dragon_scale_leggings.name=Dragon Scale Leggings
+item.mischief.dragon_scale_helmet.name=Dragon Scale Helmet
+
+item.mischief.amulet_basic.name=Basic Amulet
+item.mischief.amulet_void.name=Void Amulet
+
+item.mischief.charm_moon.name=Charm of the Moon
+item.mischief.charm_sun.name=Charm of the Sun
+item.mischief.charm_star.name=Charm of the Stars
+
+item.mischief.powder_experimental.name=Experimental Powder
+item.mischief.powder_nature.name=Nature Powder
+
+item.mischief.powder_creative.name=§5Creative Powder
+item.mischief.amulet_creative.name=§5Creative Amulet
+item.mischief.charm_creative.name=§5Creative Charm
+tile.mischief.totem_creative.name=§5Creative Totem
+
+item.mischief.amulet_basic_core.name=Basic Amulett Core
+item.mischief.amulet_void_core.name=Void Amulett Core
+item.mischief.charm_moon_core.name=Core of the Charm of the Moon
+item.mischief.charm_sun_core.name=Core of the Charm of the Sun
+item.mischief.charm_star_core.name=Core of the Charm of the Stars
+
+item.mischief.anchor.name=Anchor
+item.mischief.anchor.description=Right-click to set destination
+
+item.mischief.cloaking_cloak.name=Cloak of Cloaking
+item.mischief.cloaking_cloak.description=Not cloakable
+
+item.mischief.roots.name=Roots
+item.mischief.crystal.name=Some Crystal
+item.mischief.dragon_scale.name=Dragon Scale
+item.mischief.chaos_essence.name=Chaos Essence
+item.mischief.bottled_shade.name=Bottled Shade
+item.mischief.reality_shard.name=Piece of the Sky
+
+command.usage.select_item=Select an Item!
+command.usage.not_curseable=%s cannot be cursed!
+command.usage.curse_not_existing=The spell '%s' does not exist!
+command.usage.up_to_rank=%s can only use curses up to rank %s! (Curse rank: %s)
+command.usage.cannot_use_curse=%s cannot use the spell '%s'
+command.usage.cursed=You cursed %s with '%s'
+
+mischief.error=Error! Report to mod author of Mischief
+
+message.mischief.coma=%s seems to be in some kind of stance
+message.mischief.blocks_missing=%s blocks missing for %s
+message.mischief.click_edge=Pleace click on an corner piece
+
+message.mischief.select_powder=Only powders are cloakable
+message.mischief.does_not_exist=%s existiert nicht
+message.mischief.destination=Destination: (%s / %s / %s / %s)
+message.mischief.destination_set=Destination set: (%s / %s / %s / %s)
+message.mischief.no_destination=Destination not set
+message.mischief.portal_size=Size: %s * %s
+message.mischief.preview=Previewing: %s
+message.mischief.preview_clear=Preview cleared
+message.mischief.private_ground_enter_player=The area is protected by %s
+message.mischief.private_ground_enter=The area is protected
+message.mischief.private_ground_left=You left the protected area
+
+message.mischief.cooldown=Cooldown: %s
+message.mischief.target_not_exist=Player "%s" is not available
+tooltip.mischief.target_set=Target choosen: "%s"
+tooltip.mischief.choose_target=Choose target first
+tooltip.mischief.choose_location=Choose location first
+tooltip.mischief.target_not_found=Target not found
+tooltip.mischief.target_not_set=Target not set
+message.mischief.get_chi=%s
+message.mischief.cleared=Cleared
+
+tooltip.mischief.rank_up_to=§6Can use Curses up to rank %s
+tooltip.mischief.no_deco=Do not use for decoration (TileEntity, may cause lag)
+tooltip.mischief.spell=Curse: %s
+tooltip.mischief.blessing=Blessing: %s
+tooltip.mischief.power=Power: %s
+tooltip.mischief.effect=Effect: 
+tooltip.mischief.range=Range: %s
+tooltip.mischief.radius=Radius: %s
+tooltip.mischief.required_energy=Required Chi: %s
+tooltip.mischief.stored_chi=Stored Chi: %s
+tooltip.mischief.effect_count=%s effects
+tooltip.mischief.caster=Caster: "%s"
+tooltip.mischief.target=Target: "%s"
+tooltip.mischief.unknown=Unknown
+tooltip.mischief.no_owner=No owner set
+tooltip.mischief.owner=Owner: "%s"
+
+tooltip.hwyla.carving_assemble=Place 2x2 and right-click to assemble
+tooltip.multiblock.assembled=%s Assembled
+tooltip.mischief.active=Active
+tooltip.mischief.inactive=Inactive
+
+gui.jei.category.carving=Carving
+gui.jei.category.spell=Curse
+gui.jei.category.tinkerer=Modifying
+
+effect.multi=Every Effect
+effect.multi_good=Every Good Effect
+effect.multi_bad=Every Bad Effect
+attribute.name.multi=Multiple Attributes
+
+potion.effect.wither=Potion of Withering
+potion.effect.unluck=Potion of Badluck
+potion.effect.blindness=Potion of Blindness
+potion.effect.confusion=Potion of Confusion
+potion.effect.hunger=Potion of Hunger
+potion.effect.digSpeed=Potion of Haste
+potion.effect.digSlowDown=Potion of Minging Fatigue
+potion.effect.glowing=Potion of Glowing
+potion.effect.multi_normal=Potion of literally Everything
+potion.effect.multi_strong=Potion of literally Everything
+potion.effect.multi_good_normal=Potion of beneficial Overflow
+potion.effect.multi_good_strong=Potion of beneficial Overflow
+potion.effect.multi_bad_normal=Potion of total Disaster
+potion.effect.multi_bad_strong=Potion of total Disaster
+
+lingering_potion.effect.wither=Lingering Potion of Withering
+lingering_potion.effect.unluck=Lingering Potion of Badluck
+lingering_potion.effect.blindness=Lingering Potion of Blindness
+lingering_potion.effect.confusion=Lingering Potion of Confusion
+lingering_potion.effect.hunger=Lingering Potion of Hunger
+lingering_potion.effect.digSpeed=Lingering Potion of Haste
+lingering_potion.effect.digSlowDown=Lingering Potion of Minging Fatigue
+lingering_potion.effect.glowing=Lingering Potion of Glowing
+lingering_potion.effect.multi_normal=Lingering Potion of literally Everything
+lingering_potion.effect.multi_strong=Lingering Potion of literally Everything
+lingering_potion.effect.multi_good_normal=Lingering Potion of beneficial Overflow
+lingering_potion.effect.multi_good_strong=Lingering Potion of beneficial Overflow
+lingering_potion.effect.multi_bad_normal=Lingering Potion of total Disaster
+lingering_potion.effect.multi_bad_strong=Lingering Potion of total Disaster
+
+splash_potion.effect.wither=Splash Potion of Withering
+splash_potion.effect.unluck=Splash Potion of Badluck
+splash_potion.effect.blindness=Splash Potion of Blindness
+splash_potion.effect.confusion=Splash Potion of Confusion
+splash_potion.effect.hunger=Splash Potion of Hunger
+splash_potion.effect.digSpeed=Splash Potion of Haste
+splash_potion.effect.digSlowDown=Splash Potion of Minging Fatigue
+splash_potion.effect.glowing=Splash Potion of Glowing
+splash_potion.effect.multi_normal=Splash Potion of literally Everything
+splash_potion.effect.multi_strong=Splash Potion of literally Everything
+splash_potion.effect.multi_good_normal=Splash Potion of beneficial Overflow
+splash_potion.effect.multi_good_strong=Splash Potion of beneficial Overflow
+splash_potion.effect.multi_bad_normal=Splash Potion of total Disaster
+splash_potion.effect.multi_bad_strong=Splash Potion of total Disaster
+
+tipped_arrow.effect.wither=Arrow of Withering
+tipped_arrow.effect.unluck=Arrow of Badluck
+tipped_arrow.effect.blindness=Arrow of Blindness
+tipped_arrow.effect.confusion=Arrow of Confusion
+tipped_arrow.effect.hunger=Arrow of Hunger
+tipped_arrow.effect.digSpeed=Arrow of Haste
+tipped_arrow.effect.digSlowDown=Arrow of Minging Fatigue
+tipped_arrow.effect.glowing=Arrow of Glowing
+tipped_arrow.effect.multi_normal=Arrow of literally Everything
+tipped_arrow.effect.multi_strong=Arrow of literally Everything
+tipped_arrow.effect.multi_good_normal=Arrow of beneficial Overflow
+tipped_arrow.effect.multi_good_strong=Arrow of beneficial Overflow
+tipped_arrow.effect.multi_bad_normal=Arrow of total Disaster
+tipped_arrow.effect.multi_bad_strong=Arrow of total Disaster
+
+entity.left_body.name=Empty Body
+entity.carving_block.name=Carving Block

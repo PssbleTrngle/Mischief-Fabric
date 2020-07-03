@@ -1,0 +1,45 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Bottom",
+			"from": [ 1, 0, 1 ],
+			"to": [ 15, 3, 15 ],
+			"faces": {
+				"down": { "uv": [ 1, 1, 15, 15 ], "texture": "#texture" },
+				"up": { "uv": [ 1, 1, 15, 15 ], "texture": "#texture" },
+				"north": { "uv": [ 1, 13, 15, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 1, 13, 15, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 1, 13, 15, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 1, 13, 15, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Pillar",
+			"from": [ 3, 3, 3 ],
+			"to": [ 13, 12, 13 ],
+			"faces": {
+				"north": { "uv": [ 3, 3.625, 13, 12.625 ], "texture": "#pillar" },
+				"south": { "uv": [ 3, 3.625, 13, 12.625 ], "texture": "#pillar" },
+				"west": { "uv": [ 3, 3.625, 13, 12.625 ], "texture": "#pillar" },
+				"east": { "uv": [ 3, 3.625, 13, 12.625 ], "texture": "#pillar" }
+			}
+		},
+		{
+			"__comment": "Top",
+			"from": [ 2, 12, 2 ],
+			"to": [ 14, 16, 14 ],
+			"faces": {
+				"down": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"up": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture" },
+				"north": { "uv": [ 2, 0, 14, 4 ], "texture": "#texture" },
+				"south": { "uv": [ 2, 0, 14, 4 ], "texture": "#texture" },
+				"west": { "uv": [ 2, 0, 14, 4 ], "texture": "#texture" },
+				"east": { "uv": [ 2, 0, 14, 4 ], "texture": "#texture" }
+			}
+		}
+	]
+}
