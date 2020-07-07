@@ -13,6 +13,6 @@ interface ISpellable {
 
     fun getMaterial(): Spell.Material
 
-    fun canCast(type: Spell.Execution): Boolean
+    fun canCast(type: Spell.Type): Boolean
 
 }

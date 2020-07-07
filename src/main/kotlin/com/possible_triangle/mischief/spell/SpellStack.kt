@@ -5,8 +5,11 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.Vec3d
 import java.util.*
+import java.util.stream.Collectors
+import java.util.stream.Stream
+import kotlin.streams.toList
 
-final class SpellStack(val spell : Spell, val power: Int, val owner: UUID?, private var cooldown: Int = 0) {
+class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0) {
 
     companion object {
         fun deserialize(tag: CompoundTag): SpellStack? {
@@ -23,41 +26,40 @@ final class SpellStack(val spell : Spell, val power: Int, val owner: UUID?, priv
         return tag
     }
 
-    fun cast(type: Spell.Execution, target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null): Boolean {
+    fun cast(type: Spell.Type, target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null): Boolean {
         if(!canCast(type)) return false
 
         val ctx = Spell.Context(target, this, at, by?.uuid)
-        return Spell.attempCast(ctx)
+        return Spells.attemptCast(ctx)
     }
 
     /**
      * @return The protected entities
      */
-    fun cast(type: Spell.Execution, targets: Stream<LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null): Stream<LivingEntity> {
-        return targets.filter { target -> !cast(target, by, at) }
+    fun cast(type: Spell.Type, targets: Stream<LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null): Collection<LivingEntity> {
+        return targets.filter { target -> !cast(type, target, by, at) }.toList()
     }
 
-    fun canCast(type: Spell.Execution): Boolean {
+    fun canCast(type: Spell.Type): Boolean {
         return cooldown == 0 && executableVia(type)
     }
 
-    fun getCooldownTotal(): Int {
+    fun getCooldownTotal(): Int? {
         return spell.getCooldown(this)
     }
 
     fun tick(): Boolean {
-        if(cooldown > 0) {
-            cooldown--;
-            return true;
-        }
-        return false;
+        return if(cooldown > 0) {
+            cooldown--
+            true
+        } else false
     }
 
-    fun getCooldown() {
+    fun getCooldown(): Int {
         return cooldown
     }
 
-    fun executableVia(type: Spell.Execution): Boolean {
+    fun executableVia(type: Spell.Type): Boolean {
         return spell.type == type;
     }
 

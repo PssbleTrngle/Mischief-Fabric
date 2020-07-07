@@ -21,7 +21,9 @@
       "com.possible_triangle.mischief.Mischief::init"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "mischief.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.7.1",
     "fabric": "*",

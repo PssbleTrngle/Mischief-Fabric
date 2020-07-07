@@ -4,9 +4,9 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.util.math.Vec3d
 import java.util.*
 
-abstract class Spell(val type: Exectution) {
+abstract class Spell(val type: Type) {
 
-    enum Exectution {
+    enum class Type {
         TRIGGER, TICK
     }
 
@@ -18,28 +18,16 @@ abstract class Spell(val type: Exectution) {
         }
     }
 
-    companion object {
-        fun attempCast(ctx: Context): Boolean {
-            val protection = findProtected(ctx);
+    abstract fun getCooldown(stack: SpellStack): Int?
 
-            if(protection != null) {
-                protection.onSuccess(ctx)
-                return false
-            } else {
-                ctx.spell.spell.apply(ctx)
-                return true
-            }
-        }
+    abstract fun getRank(stack: SpellStack): Int
 
-        fun findProtected(ctx: Context): Protection {
-            return false;
-        }
+    abstract fun maxPower(): Int
+
+    internal abstract fun apply(ctx: Context)
+
+    open fun affects(): Class<out LivingEntity> {
+        return LivingEntity::class.java
     }
-
-    abstract getCooldown(stack: SpellStack): Int?
-
-    abstract getRank(stack: SpellStack): Int
-
-    protected abstract fun apply(ctx: Context)
 
 }

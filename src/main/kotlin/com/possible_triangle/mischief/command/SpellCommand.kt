@@ -15,6 +15,7 @@ import com.possible_triangle.mischief.item.SpelledItem
 import com.possible_triangle.mischief.spell.Spell
 import com.possible_triangle.mischief.spell.SpellStack
 import com.possible_triangle.mischief.spell.Spells
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.CommandSource
 import net.minecraft.server.command.ServerCommandSource
@@ -60,7 +61,7 @@ object SpellCommand {
         val held = ctx.source.player.activeItem
 
         try {
-            SpelledItem.setCurse(SpellStack(spell, power), held)
+            SpelledItem.setCurse(SpellStack(spell, power, if(ctx.source.entity is PlayerEntity) ctx.source.player.uuid else null), held)
         } catch (e: IllegalArgumentException) {
             throw INVALID_ITEM.create()
         }
