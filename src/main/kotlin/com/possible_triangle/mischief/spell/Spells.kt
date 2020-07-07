@@ -30,7 +30,8 @@ object Spells {
     val DROWN = Registry.register(REGISTRY, "drown", DrownSpell())
 
     fun attemptCast(ctx: Context): Boolean {
-        val protection = Protection.find(ctx);
+        if(ctx.spell.spell.affects().isInstance(ctx.target)) return false
+        val protection = Protection.find(ctx)
 
         return if (protection != null) {
             protection.onSuccess(ctx)
