@@ -10,7 +10,7 @@ class DropSpell : Spell(Type.TRIGGER) {
         if(drop != null) ctx.target.dropStack(drop)
     }
 
-    override fun getCooldown(stack: SpellStack): Int? {
+    override fun getCooldown(stack: SpellStack): Int {
         return 20 * 5
     }
 

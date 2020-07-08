@@ -18,7 +18,7 @@ abstract class Spell(val type: Type) {
         }
     }
 
-    abstract fun getCooldown(stack: SpellStack): Int?
+    abstract fun getCooldown(stack: SpellStack): Int
 
     abstract fun getRank(stack: SpellStack): Int
 

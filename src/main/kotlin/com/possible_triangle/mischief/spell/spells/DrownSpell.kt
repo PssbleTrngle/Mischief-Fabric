@@ -9,7 +9,7 @@ class DrownSpell : Spell(Type.TICK) {
 
     }
 
-    override fun getCooldown(stack: SpellStack): Int? {
+    override fun getCooldown(stack: SpellStack): Int {
         return 20 * (4 + maxPower() - stack.power)
     }
 

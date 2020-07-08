@@ -9,6 +9,7 @@ import java.util.*
 import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.streams.toList
+import com.possible_triangle.mischief.spell.Spell.Type
 
 class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0) {
 
@@ -32,25 +33,29 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
         return tag
     }
 
-    fun cast(type: Spell.Type, target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null): Boolean {
+    fun cast(target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Boolean {
         if(!canCast(type)) return false
 
         val ctx = Spell.Context(target, this, at, by?.uuid)
-        return Spells.attemptCast(ctx)
+        return if (Spells.attemptCast(ctx)) {
+            val cooldown = getCooldownTotal()
+            if(cooldown > 0) this.cooldown = cooldown
+            true
+        } else false
     }
 
     /**
      * @return The protected entities
      */
-    fun cast(type: Spell.Type, targets: Stream<LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null): Collection<LivingEntity> {
-        return targets.filter { target -> !cast(type, target, by, at) }.toList()
+    fun cast(targets: Stream<LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Collection<LivingEntity> {
+        return targets.filter { target -> !cast(target, by, at, type) }.toList()
     }
 
-    fun canCast(type: Spell.Type): Boolean {
-        return cooldown == 0 && executableVia(type)
+    fun canCast(type: Type?): Boolean {
+        return cooldown == 0 && (type == null || executableVia(type))
     }
 
-    fun getCooldownTotal(): Int? {
+    fun getCooldownTotal(): Int {
         return spell.getCooldown(this)
     }
 
@@ -65,7 +70,7 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
         return cooldown
     }
 
-    fun executableVia(type: Spell.Type): Boolean {
+    fun executableVia(type: Type): Boolean {
         return spell.type == type;
     }
 

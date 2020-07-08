@@ -1,6 +1,7 @@
 package com.possible_triangle.mischief.block.tile;
 
 import com.possible_triangle.mischief.spell.ISpellable
+import com.possible_triangle.mischief.spell.ISpellableReference
 import com.possible_triangle.mischief.spell.Spell
 import com.possible_triangle.mischief.spell.SpellStack
 import net.minecraft.block.entity.BlockEntity
@@ -8,10 +9,10 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.util.Tickable
 import net.minecraft.util.math.Vec3d
 
-abstract class SpellableTile(type: BlockEntityType<*>) : BlockEntity(type), ISpellable, Tickable {
+abstract class SpellableTile(type: BlockEntityType<*>) : BlockEntity(type), ISpellableReference, Tickable {
 
     var spell: SpellStack? = null
-        set(spell: SpellStack?) {
+        set(spell) {
             field = spell
             markDirty()
         }
@@ -23,18 +24,10 @@ abstract class SpellableTile(type: BlockEntityType<*>) : BlockEntity(type), ISpe
 
     abstract fun update()
 
-    fun getBlock(): ISpellable {
+    override fun getReferent(): ISpellable {
         val block = this.cachedState.block
         if(block is ISpellable) return block
         throw IllegalArgumentException("The block of a spellable tile must also implement `ISpellable`")
-    }
-
-    override fun getMaterial(): Spell.Material {
-        return getBlock().getMaterial()
-    }
-
-    override fun canCast(type: Spell.Type): Boolean {
-        return getBlock().canCast(type)
     }
 
     fun getSpellSource(): Vec3d {

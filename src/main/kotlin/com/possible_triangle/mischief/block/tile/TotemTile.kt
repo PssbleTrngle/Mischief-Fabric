@@ -33,7 +33,7 @@ class TotemTile(type: BlockEntityType<*>) : SpellableTile(type) {
                 t -> type == Spell.Type.TICK || last.contains(t.uuid)
             }?.stream() ?: Stream.of()
 
-            last = spell.cast(type, targets, null, getSpellSource()).map(LivingEntity::getUuid)
+            last = spell.cast(targets, null, getSpellSource()).map(LivingEntity::getUuid)
         }
     }
 
