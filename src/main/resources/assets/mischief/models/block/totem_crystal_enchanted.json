@@ -1,5 +1,5 @@
 {
-	"parent": "mischief:block/totem/totem_marble",
+	"parent": "mischief:block/totem_crystal",
 	"textures": {
 		"eyes": "mischief:blocks/totem_cursed"
 	}

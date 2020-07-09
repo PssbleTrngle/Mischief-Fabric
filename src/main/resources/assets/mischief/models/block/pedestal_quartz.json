@@ -1,8 +1,0 @@
-{
-  "parent": "mischief:block/pedestal",
-  "textures": {
-    "texture": "block/chiseled_quartz_block_top",
-    "pillar": "block/quartz_pillar",
-    "particle": "block/chiseled_quartz_block_top"
-  }
-}

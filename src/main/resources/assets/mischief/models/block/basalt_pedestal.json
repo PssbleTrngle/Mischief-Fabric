@@ -1,7 +1,7 @@
 {
 	"parent": "mischief:block/pedestal",
 	"textures": {
-		"texture": "mischief:blocks/basalt",
+		"texture": "mischief:block/basalt",
 		"pillar": "mischief:blocks/basalt",
 		"particle": "mischief:blocks/basalt"
 	}

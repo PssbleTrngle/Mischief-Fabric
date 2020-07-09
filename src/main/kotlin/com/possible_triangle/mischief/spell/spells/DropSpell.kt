@@ -2,12 +2,13 @@ package com.possible_triangle.mischief.spell.spells
 
 import com.possible_triangle.mischief.spell.Spell
 import com.possible_triangle.mischief.spell.SpellStack
+import net.minecraft.item.ItemStack
 
 class DropSpell : Spell(Type.TRIGGER) {
 
     override fun apply(ctx: Context) {
-        val drop = ctx.target.activeItem
-        if(drop != null) ctx.target.dropStack(drop)
+        val held = ctx.target.itemsHand.find { s -> !s.isEmpty }
+        if(held != null) ctx.target.dropStack(held)
     }
 
     override fun getCooldown(stack: SpellStack): Int {

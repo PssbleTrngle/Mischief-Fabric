@@ -1,5 +1,5 @@
 {
-	"parent": "mischief:block/totem/totem_clay",
+	"parent": "mischief:block/totem_blackstone",
 	"textures": {
 		"eyes": "mischief:blocks/totem_cursed"
 	}

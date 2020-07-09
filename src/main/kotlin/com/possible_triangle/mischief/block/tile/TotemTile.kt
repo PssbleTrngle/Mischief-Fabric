@@ -14,7 +14,7 @@ import net.minecraft.util.math.Vec3d
 import java.util.*
 import java.util.stream.Stream
 
-class TotemTile(type: BlockEntityType<*>) : SpellableTile(type) {
+class TotemTile : SpellableTile(Content.TOTEM_TILE_TYPE) {
 
     fun getRange(): Box {
         return Box(pos).expand(getMaterial().range.toDouble())

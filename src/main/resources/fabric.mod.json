@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "mischief",
   "version": "${version}",
-
   "name": "Mischief",
   "description": "This mod aims to enable playing tricks between players in a more creative way than simply killing them.",
   "authors": [
@@ -12,13 +11,11 @@
     "sources": "https://github.com/PssbleTrngle/Mischief-Fabric",
     "issues": "https://github.com/PssbleTrngle/Mischief-Fabric/issues"
   },
-
   "license": "CC0-1.0",
-
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.possible_triangle.mischief.Mischief::init"
+      "com.possible_triangle.mischief.Mischief"
     ]
   },
   "mixins": [

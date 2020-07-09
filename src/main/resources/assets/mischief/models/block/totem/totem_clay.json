@@ -1,6 +1,0 @@
-{
-	"parent": "mischief:block/totem/totem",
-	"textures": {
-		"texture": "minecraft:blocks/clay"
-	}
-}

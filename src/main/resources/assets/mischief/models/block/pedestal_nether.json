@@ -1,8 +1,0 @@
-{
-  "parent": "mischief:block/pedestal",
-  "textures": {
-    "texture": "block/nether_bricks",
-    "pillar": "block/magma",
-    "particle": "block/nether_bricks"
-  }
-}

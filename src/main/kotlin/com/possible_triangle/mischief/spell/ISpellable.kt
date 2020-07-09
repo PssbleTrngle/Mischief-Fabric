@@ -15,4 +15,8 @@ interface ISpellable {
 
     fun canCast(type: Spell.Type): Boolean
 
+    fun canHold(spell: SpellStack): Boolean {
+        return canCast(spell.spell.type)
+    }
+
 }

@@ -1,0 +1,6 @@
+{
+	"parent": "mischief:block/totem",
+	"textures": {
+		"texture": "mischief:block/crystal"
+	}
+}

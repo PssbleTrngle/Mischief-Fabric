@@ -3,6 +3,7 @@ package com.possible_triangle.mischief.spell
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
 import com.possible_triangle.mischief.Content
+import com.possible_triangle.mischief.Mischief
 import com.possible_triangle.mischief.spell.spells.DropSpell
 import com.possible_triangle.mischief.spell.spells.DrownSpell
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
@@ -18,11 +19,10 @@ import org.spongepowered.asm.mixin.injection.At
 import org.spongepowered.asm.mixin.injection.Inject
 import java.util.function.Function
 
-@Mixin(LivingEntity::class)
 object Spells {
 
-    private val KEY = RegistryKey.ofRegistry<Spell>(Identifier(Content.MODID, "spell"))
-    val REGISTRY = FabricRegistryBuilder.createSimple(Spell::class.java, Identifier(Content.MODID, "spell"))
+    private val KEY = RegistryKey.ofRegistry<Spell>(Identifier(Mischief.MODID, "spell"))
+    val REGISTRY = FabricRegistryBuilder.createSimple(Spell::class.java, Identifier(Mischief.MODID, "spell"))
         .attribute(RegistryAttribute.MODDED)
         .buildAndRegister()
 
@@ -30,7 +30,7 @@ object Spells {
     val DROWN = Registry.register(REGISTRY, "drown", DrownSpell())
 
     fun attemptCast(ctx: Context): Boolean {
-        if(ctx.spell.spell.affects().isInstance(ctx.target)) return false
+        if(!ctx.spell.spell.affects().isInstance(ctx.target)) return false
         val protection = Protection.find(ctx)
 
         return if (protection != null) {

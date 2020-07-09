@@ -1,7 +1,7 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"texture": "mischief:blocks/dreamcatcher_cosmic",		
+		"texture": "mischief:block/dreamcatcher_cosmic",
 		"particle": "#texture"
 	},
 	"elements": [ 	 

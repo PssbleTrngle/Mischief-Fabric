@@ -2,7 +2,7 @@
 	"__comment": "Designed by Possible_triangle with Cubik Studio - https://cubik.studio",
 	"textures": {
 		"particle": "mischief:blocks/basalt",
-		"texture": "mischief:blocks/basalt"
+		"texture": "mischief:block/basalt"
 	},
 	"elements": [ 	 
 		{

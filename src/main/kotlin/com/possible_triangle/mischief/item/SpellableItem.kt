@@ -25,7 +25,7 @@ abstract class SpellableItem(private val material: Spell.Material, settings: Set
             if (i !is ISpellable) throw IllegalArgumentException("Given item can not have a spell applied")
 
             if (spell != null) {
-                if (i.canCast(spell.spell.type)) throw IllegalArgumentException("Item can not hold spell of this type")
+                if (!i.canHold(spell)) throw IllegalArgumentException("Item can not hold spell of this type")
                 item.orCreateTag.put("spell", spell.serialize())
             } else item.orCreateTag.remove("spell")
         }
