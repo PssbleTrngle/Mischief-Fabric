@@ -10,8 +10,17 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.streams.toList
 import com.possible_triangle.mischief.spell.Spell.Type
+import net.minecraft.server.world.ServerWorld
 
-class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0) {
+class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0, val piercing: Boolean = false) {
+
+    val rank: Int by lazy {
+        spell.getRank(this)
+    }
+
+    val totalCooldown: Int by lazy {
+        spell.getCooldown(this)
+    }
 
     companion object {
         fun deserialize(tag: CompoundTag): SpellStack? {
@@ -20,7 +29,8 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
             val cooldown = tag.getInt("cooldown").coerceAtLeast(0)
             val owner = if (tag.contains("owner")) tag.getUuid("owner") else null
             val power = tag.getInt("power").coerceIn(1, spell.maxPower())
-            return SpellStack(spell, power, owner, cooldown)
+            val piercing = tag.getBoolean("piercing")
+            return SpellStack(spell, power, owner, cooldown, piercing)
         }
     }
 
@@ -29,6 +39,7 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
         tag.putInt("power", power)
         tag.putInt("cooldown", cooldown)
         tag.putString("id", Spells.REGISTRY.getId(spell)!!.toString())
+        tag.putBoolean("piercing", piercing)
         if(owner != null) tag.putUuid("owner", owner)
         return tag
     }
@@ -36,9 +47,12 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
     fun cast(target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Boolean {
         if(!canCast(type)) return false
 
-        val ctx = Spell.Context(target, this, at, by?.uuid)
+        val world = by?.world ?: target.world
+        if(world !is ServerWorld) return false
+
+        val ctx = Spell.Context(world, target, this, at, by?.uuid)
         return if (Spells.attemptCast(ctx)) {
-            val cooldown = getCooldownTotal()
+            val cooldown = totalCooldown
             if(cooldown > 0) this.cooldown = cooldown
             true
         } else false
@@ -53,10 +67,6 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
 
     fun canCast(type: Type?): Boolean {
         return cooldown == 0 && (type == null || executableVia(type))
-    }
-
-    fun getCooldownTotal(): Int {
-        return spell.getCooldown(this)
     }
 
     fun tick(): Boolean {

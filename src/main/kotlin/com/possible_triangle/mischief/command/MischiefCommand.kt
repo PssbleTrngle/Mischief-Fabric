@@ -12,6 +12,7 @@ object MischiefCommand {
     fun register(dispatched: CommandDispatcher<ServerCommandSource>) {
         dispatched.register(CommandManager.literal(Mischief.MODID)
             .then(SpellCommand.register())
+            .then(DisguiseCommand.register())
         )
     }
 

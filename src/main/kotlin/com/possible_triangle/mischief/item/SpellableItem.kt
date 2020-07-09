@@ -8,6 +8,8 @@ import com.possible_triangle.mischief.spell.Spells
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.client.item.TooltipContext
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.text.Text
@@ -35,6 +37,41 @@ abstract class SpellableItem(private val material: Spell.Material, settings: Set
                 return SpellStack.deserialize(item.orCreateTag.getCompound("spell"))
             return null
         }
+
+        fun appendTooltip(stack: ItemStack, tooltip: MutableList<Text>, context: TooltipContext) {
+            val item = stack.item ?: return
+            if(item !is ISpellable) return
+            val spell = getSpell(stack)
+            val material = item.getMaterial()
+
+            if(spell != null) {
+                val id = Spells.REGISTRY.getId(spell.spell)!!
+                tooltip.add(TranslatableText("${id.namespace}.spell.${id.path}"))
+                if(spell.getCooldown() > 0) tooltip.add(TranslatableText("mischief.tooltip.cooldown", spell.getCooldown()))
+                tooltip.add(TranslatableText("mischief.tooltip.power", spell.power))
+                if(material.range > 0) tooltip.add(TranslatableText("mischief.tooltip.range", material.range))
+            } else {
+                tooltip.add(TranslatableText("mischief.tooltip.rank_up_to", material.rank))
+            }
+        }
+    }
+
+    final override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
+        super.inventoryTick(stack, world, entity, slot, selected)
+        val spell = getSpell(stack)
+        if(spell != null) {
+            val ticked = spell.tick()
+            val casted = entity is LivingEntity && tickSpell(spell, stack, world, entity, slot, selected)
+            if(ticked || casted) setSpell(spell, stack)
+        }
+    }
+
+    /**
+     * Do something with the spell after [SpellStack.tick] has been called
+     * @return Whether the spell was cast
+     */
+    open fun tickSpell(spell: SpellStack, stack: ItemStack, world: World, entity: LivingEntity, slot: Int, selected: Boolean): Boolean {
+        return false
     }
 
     override fun getMaterial(): Spell.Material {
@@ -47,17 +84,7 @@ abstract class SpellableItem(private val material: Spell.Material, settings: Set
 
     @Environment(EnvType.CLIENT)
     override fun appendTooltip(stack: ItemStack, world: World?, tooltip: MutableList<Text>, context: TooltipContext) {
-        val spell = getSpell(stack)
-
-        if(spell != null) {
-            val id = Spells.REGISTRY.getId(spell.spell)!!
-            tooltip.add(TranslatableText("${id.namespace}.spell.${id.path}"))
-            tooltip.add(TranslatableText("mischief.tooltip.cooldown", spell.getCooldown()))
-            tooltip.add(TranslatableText("mischief.tooltip.power", spell.power))
-            if(material.range > 0) tooltip.add(TranslatableText("mischief.tooltip.range", material.range))
-        } else {
-            tooltip.add(TranslatableText("mischief.tooltip.rank_up_to", material.rank))
-        }
+        appendTooltip(stack, tooltip, context)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.possible_triangle.mischief.spell
 
 import net.minecraft.entity.LivingEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.Vec3d
 import java.util.*
 
@@ -12,9 +13,9 @@ abstract class Spell(val type: Type) {
 
     data class Material(val rank: Int, val range: Int = 0)
 
-    data class Context(val target: LivingEntity, val spell: SpellStack, val at: Vec3d?, private val by: UUID?) {
-        fun getSource(): UUID? {
-            return by ?: spell.owner
+    data class Context(val world: ServerWorld, val target: LivingEntity, val spell: SpellStack, val at: Vec3d?, private val by: UUID?) {
+        val source: UUID? by lazy {
+            by ?: spell.owner
         }
     }
 
@@ -29,5 +30,7 @@ abstract class Spell(val type: Type) {
     open fun affects(): Class<out LivingEntity> {
         return LivingEntity::class.java
     }
+
+
 
 }

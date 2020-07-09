@@ -40,8 +40,8 @@ abstract class SpellableTile(type: BlockEntityType<*>) : BlockEntity(type), ISpe
         throw IllegalArgumentException("The block of a spellable tile must also implement `ISpellable`")
     }
 
-    fun getSpellSource(): Vec3d {
-        return Vec3d(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
+    val spellSource: Vec3d by lazy {
+        Vec3d(pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble())
     }
 
     override fun toTag(tag: CompoundTag): CompoundTag {

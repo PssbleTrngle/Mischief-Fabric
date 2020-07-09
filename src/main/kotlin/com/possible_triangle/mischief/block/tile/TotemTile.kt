@@ -16,8 +16,8 @@ import java.util.stream.Stream
 
 class TotemTile : SpellableTile(Content.TOTEM_TILE_TYPE) {
 
-    fun getRange(): Box {
-        return Box(pos).expand(getMaterial().range.toDouble())
+    val range: Box by lazy {
+        Box(pos).expand(getMaterial().range.toDouble())
     }
 
     // TODO: Save to NBT
@@ -29,11 +29,11 @@ class TotemTile : SpellableTile(Content.TOTEM_TILE_TYPE) {
         
             val type = spell.spell.type
             
-            val targets = world?.getEntities(spell.spell.affects(), getRange()) {
+            val targets = world?.getEntities(spell.spell.affects(), range) {
                 t -> type == Spell.Type.TICK || last.contains(t.uuid)
             }?.stream() ?: Stream.of()
 
-            last = spell.cast(targets, null, getSpellSource()).map(LivingEntity::getUuid)
+            last = spell.cast(targets, null, spellSource).map(LivingEntity::getUuid)
         }
     }
 

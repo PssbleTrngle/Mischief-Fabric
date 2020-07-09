@@ -4,8 +4,6 @@ import com.google.common.collect.Lists
 import com.google.common.collect.Maps
 import com.possible_triangle.mischief.Content
 import com.possible_triangle.mischief.Mischief
-import com.possible_triangle.mischief.spell.spells.DropSpell
-import com.possible_triangle.mischief.spell.spells.DrownSpell
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder
 import net.fabricmc.fabric.api.event.registry.RegistryAttribute
 import net.minecraft.entity.LivingEntity
@@ -13,6 +11,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.RegistryKey
 import com.possible_triangle.mischief.spell.Spell.Context
+import com.possible_triangle.mischief.spell.spells.*
 import net.fabricmc.fabric.api.event.world.WorldTickCallback
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
@@ -21,20 +20,30 @@ import java.util.function.Function
 
 object Spells {
 
-    private val KEY = RegistryKey.ofRegistry<Spell>(Identifier(Mischief.MODID, "spell"))
     val REGISTRY = FabricRegistryBuilder.createSimple(Spell::class.java, Identifier(Mischief.MODID, "spell"))
         .attribute(RegistryAttribute.MODDED)
         .buildAndRegister()
 
     val DROP = Registry.register(REGISTRY, "drop", DropSpell())
     val DROWN = Registry.register(REGISTRY, "drown", DrownSpell())
+    val BOUNCE = Registry.register(REGISTRY, "bounce", BounceSpell())
+
+    val REFLECT = Registry.register(REGISTRY, "reflect", ReflectProtection())
+    val SHIELD = Registry.register(REGISTRY, "shield", ShieldProtection())
 
     fun attemptCast(ctx: Context): Boolean {
         if(!ctx.spell.spell.affects().isInstance(ctx.target)) return false
-        val protection = Protection.find(ctx)
 
-        return if (protection != null) {
-            protection.onSuccess(ctx)
+        if(ctx.spell.piercing) {
+            ctx.spell.spell.apply(ctx)
+            return true
+        }
+
+        val stack = Protection.find(ctx)
+        val protection = stack?.spell
+
+        return if (protection is Protection) {
+            protection.onSuccess(stack, ctx)
             false
         } else {
             ctx.spell.spell.apply(ctx)
