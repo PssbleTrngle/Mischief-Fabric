@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "com.possible_triangle.mischief.Mischief"
+    ],
+    "rrp:pregen": [
+      "com.possible_triangle.mischief.data.DataGenerators"
     ]
   },
   "mixins": [

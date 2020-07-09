@@ -16,10 +16,6 @@ import java.util.stream.Stream
 
 class TotemTile : SpellableTile(Content.TOTEM_TILE_TYPE) {
 
-    val range: Box by lazy {
-        Box(pos).expand(getMaterial().range.toDouble())
-    }
-
     // TODO: Save to NBT
     private var last: List<UUID> = Lists.newArrayList()
 

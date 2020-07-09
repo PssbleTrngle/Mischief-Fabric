@@ -1,6 +1,7 @@
 package com.possible_triangle.mischief
 
 import com.possible_triangle.mischief.command.MischiefCommand
+import com.possible_triangle.mischief.data.DataGenerators
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.minecraft.data.DataGenerator
@@ -16,6 +17,7 @@ class Mischief : ModInitializer {
         println("Ready for Mischief!")
         Content.init()
         CommandRegistrationCallback.EVENT.register(CommandRegistrationCallback { d, _ -> MischiefCommand.register(d) })
+        DataGenerators.register()
     }
 
 }

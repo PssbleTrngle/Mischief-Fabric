@@ -11,12 +11,17 @@ import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.Tickable
+import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
 
 abstract class SpellableTile(type: BlockEntityType<*>) : BlockEntity(type), ISpellableReference, Tickable {
 
     var spell: SpellStack? = null
         private set
+
+    val range: Box by lazy {
+        Box(pos).expand(getMaterial().range.toDouble())
+    }
 
     fun setSpell(spell: SpellStack?) {
         if(spell != null && !canHold(spell)) throw IllegalArgumentException("Tile cannot hold spell")

@@ -5,24 +5,32 @@ import com.possible_triangle.mischief.item.SpellableItem
 import com.possible_triangle.mischief.spell.ISpellable
 import com.possible_triangle.mischief.spell.Spell
 import com.possible_triangle.mischief.spell.SpellStack
+import com.possible_triangle.mischief.spell.Spells
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.particle.DustParticleEffect
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.EnumProperty
+import net.minecraft.util.ActionResult
+import net.minecraft.util.Hand
 import net.minecraft.util.StringIdentifiable
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
+import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import java.util.stream.Stream
 
 abstract class SpellableBlock(private val spellMaterial: Spell.Material, settings: Settings) :
-    Block(settings), ISpellable, BlockEntityProvider {
+        Block(settings), ISpellable, BlockEntityProvider {
 
     init {
         defaultState = super.getDefaultState().with(STATE, State.NONE)
@@ -77,5 +85,32 @@ abstract class SpellableBlock(private val spellMaterial: Spell.Material, setting
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
         return defaultState
+    }
+
+    override fun onUse(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult): ActionResult {
+        val tile = getTile(world, pos) ?: return ActionResult.PASS
+        val color = tile.spell?.spell?.color ?: Spells.NONE_COLOR
+        val particle = DustParticleEffect(color.red / 255F, color.blue / 255F, color.green / 255F, 1F)
+        val range = tile.range
+
+        if(world is ServerWorld) {
+            val p = 4
+            val minX = range.minX.toInt() * p
+            val minY = range.minY.toInt() * p
+            val minZ = range.minZ.toInt() * p
+            val maxX = range.maxX.toInt() * p
+            val maxY = range.maxY.toInt() * p
+            val maxZ = range.maxZ.toInt() * p
+            for (x in minX..maxX)
+                for (y in minY..maxY)
+                    for (z in minZ..maxZ) {
+                        val xb = x in (minX + 1) until maxX
+                        val yb = y in (minY + 1) until maxY
+                        val zb = z in (minZ + 1) until maxZ
+                        if (Stream.of(xb, yb, zb).filter { it }.count() <= 1) world.spawnParticles(particle, x / p.toDouble(), y / p.toDouble(), z / p.toDouble(), 1, 0.0, 0.0, 0.0, 0.0)
+                    }
+        }
+
+        return ActionResult.SUCCESS
     }
 }

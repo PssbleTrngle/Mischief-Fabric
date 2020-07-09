@@ -19,6 +19,7 @@ minecraft {
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
     jcenter()
+    maven { url = 'https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/' }
 }
 
 dependencies {
@@ -34,6 +35,8 @@ dependencies {
     modImplementation ("me.shedaniel.cloth.api:cloth-api:${project.cloth_api_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.0'
 
 }
 

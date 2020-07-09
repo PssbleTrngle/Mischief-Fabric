@@ -3,9 +3,10 @@ package com.possible_triangle.mischief.spell
 import net.minecraft.entity.LivingEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.Vec3d
+import java.awt.Color
 import java.util.*
 
-abstract class Spell(val type: Type) {
+abstract class Spell(val type: Type, val bad: Boolean = true) {
 
     enum class Type {
         TRIGGER, TICK
@@ -31,6 +32,9 @@ abstract class Spell(val type: Type) {
         return LivingEntity::class.java
     }
 
-
+    val color: Color by lazy {
+        if(bad) Color(0xCB110C)
+        else Color(0x08DE89)
+    }
 
 }

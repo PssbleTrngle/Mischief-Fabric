@@ -16,9 +16,12 @@ import net.fabricmc.fabric.api.event.world.WorldTickCallback
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
 import org.spongepowered.asm.mixin.injection.Inject
+import java.awt.Color
 import java.util.function.Function
 
 object Spells {
+
+    val NONE_COLOR = Color(0xC1C1C1)
 
     val REGISTRY = FabricRegistryBuilder.createSimple(Spell::class.java, Identifier(Mischief.MODID, "spell"))
         .attribute(RegistryAttribute.MODDED)
