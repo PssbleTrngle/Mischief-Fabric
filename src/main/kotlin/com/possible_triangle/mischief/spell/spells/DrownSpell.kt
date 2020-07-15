@@ -6,11 +6,11 @@ import com.possible_triangle.mischief.spell.SpellStack
 class DrownSpell : Spell(Type.TICK) {
 
     override fun apply(ctx: Context) {
-
+        ctx.target.air--
     }
 
     override fun getCooldown(stack: SpellStack): Int {
-        return 20 * (4 + maxPower() - stack.power)
+        return (4 + maxPower() - stack.power)
     }
 
     override fun getRank(stack: SpellStack): Int {

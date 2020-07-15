@@ -1,27 +1,28 @@
 package com.possible_triangle.mischief
 
+import com.possible_triangle.mischief.block.CarvingTable
+import com.possible_triangle.mischief.block.Dreamcatcher
 import com.possible_triangle.mischief.block.SpellableBlock
-import com.possible_triangle.mischief.spell.Spell
-import com.possible_triangle.mischief.spell.Spell.Material
-import com.possible_triangle.mischief.item.Powder
 import com.possible_triangle.mischief.block.Totem
+import com.possible_triangle.mischief.block.tile.CarvingTableTile
+import com.possible_triangle.mischief.block.tile.DreamcatcherTile
 import com.possible_triangle.mischief.block.tile.TotemTile
+import com.possible_triangle.mischief.item.Powder
 import com.possible_triangle.mischief.item.SpellableBlockItem
-import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
+import com.possible_triangle.mischief.recipe.CarvingRecipe
+import com.possible_triangle.mischief.recipe.serializer.CarvingRecipeSerializer
+import com.possible_triangle.mischief.spell.Spell.Material
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
-import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Block
 import net.minecraft.block.Blocks
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.BlockItem
-import net.minecraft.item.ItemGroup
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.recipe.RecipeType
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
-import java.util.function.Function
 import java.util.function.Supplier
-import java.util.stream.Collectors
-import java.util.stream.Stream
 
 object Content {
 
@@ -35,20 +36,37 @@ object Content {
 
     val GROUP = FabricItemGroupBuilder.build(id("items")) { ItemStack(EXPERIMENTAL_POWDER) }!!
 
+    val CARVING_TABLE = registerBlock(id("carving_table"), CarvingTable(), { b -> BlockItem(b, Item.Settings().group(GROUP)) })
+
     val EXPERIMENTAL_POWDER = Registry.register(Registry.ITEM, id("experimental_powder"), Powder(Material(3)))!!
     val NATURAL_POWDER = Registry.register(Registry.ITEM, id("natural_powder"), Powder(Material(2)))!!
 
-    val BLACKSTONE_TOTEM = registerBlock(id("blackstone_totem"), Totem(Material(4, 2),Blocks.BLACKSTONE), Function { b -> SpellableBlockItem(b) })
-    val MARBLE_TOTEM = registerBlock(id("marble_totem"), Totem(Material(3, 3), Blocks.QUARTZ_BLOCK), Function { b -> SpellableBlockItem(b) })
-
+    val BLACKSTONE_TOTEM = registerSpellableBlock(id("blackstone_totem"), Totem(Material(4, 2), Blocks.BLACKSTONE))
+    val MARBLE_TOTEM = registerSpellableBlock(id("marble_totem"), Totem(Material(3, 3), Blocks.QUARTZ_BLOCK))
     val totems = listOf(BLACKSTONE_TOTEM, MARBLE_TOTEM).map { it to it.parent }.toMap()
+
+    val COSMIC_DREAMCATCHER = registerSpellableBlock(id("cosmic_dreamcatcher"), Dreamcatcher(Material(2, 3)))
+    val dreamcatchers = listOf(COSMIC_DREAMCATCHER)
 
     val TOTEM_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("totem"),
             BlockEntityType.Builder.create(Supplier { TotemTile() }, *totems.keys.toTypedArray()).build(null))!!
 
-    private fun <B : Block, I : BlockItem> registerBlock(id: Identifier, block: B, item: Function<B, I>): B {
+    val DREAMCATCHER_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("dreamcatcher"),
+            BlockEntityType.Builder.create(Supplier { DreamcatcherTile() }, *dreamcatchers.toTypedArray()).build(null))!!
+
+    val CARVING_TABLE_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("carving_table"),
+            BlockEntityType.Builder.create(Supplier { CarvingTableTile() }, CARVING_TABLE).build(null))!!
+
+    val CARVING = Registry.register(Registry.RECIPE_TYPE, id("carving"), object : RecipeType<CarvingRecipe> {})
+    val CARVING_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, id("carving"), CarvingRecipeSerializer())
+
+    private fun <B : SpellableBlock> registerSpellableBlock(id: Identifier, block: B): B {
+        return registerBlock(id, block, { b -> SpellableBlockItem(b) })
+    }
+
+    private fun <B : Block, I : BlockItem> registerBlock(id: Identifier, block: B, item: (B) -> I): B {
         val block = Registry.register(Registry.BLOCK, id, block)
-        Registry.register(Registry.ITEM, id, item.apply(block))
+        Registry.register(Registry.ITEM, id, item(block))
         return block
     }
 

@@ -15,7 +15,7 @@ import net.minecraft.text.Text
 import net.minecraft.world.World
 
 class SpellableBlockItem(block: SpellableBlock, settings: Settings = Settings()) :
-    BlockItem(block, settings.group(Content.GROUP)) , ISpellableReference {
+    BlockItem(block, settings.group(Content.GROUP).maxCount(1)) , ISpellableReference {
 
     override fun getBlock(): SpellableBlock {
         return super.getBlock() as SpellableBlock

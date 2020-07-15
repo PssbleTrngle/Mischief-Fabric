@@ -17,6 +17,9 @@
     "main": [
       "com.possible_triangle.mischief.Mischief"
     ],
+    "client": [
+      "com.possible_triangle.mischief.MischiefClient"
+    ],
     "rrp:pregen": [
       "com.possible_triangle.mischief.data.DataGenerators"
     ]

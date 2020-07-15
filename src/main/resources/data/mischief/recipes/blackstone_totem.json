@@ -1,0 +1,7 @@
+{
+  "type": "mischief:carving",
+  "block": {
+    "item": "minecraft:blackstone"
+  },
+  "result": "mischief:blackstone_totem"
+}

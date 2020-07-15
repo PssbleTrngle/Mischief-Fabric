@@ -4,10 +4,12 @@ import com.google.common.collect.Lists
 import com.possible_triangle.mischief.Content;
 import com.possible_triangle.mischief.spell.Spell
 import com.possible_triangle.mischief.spell.ISpellable;
+import com.possible_triangle.mischief.spell.SpellStack
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.client.util.math.Vector3d
 import net.minecraft.client.util.math.Vector3f
 import net.minecraft.entity.LivingEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.structure.rule.AxisAlignedLinearPosRuleTest
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Vec3d
@@ -19,18 +21,21 @@ class TotemTile : SpellableTile(Content.TOTEM_TILE_TYPE) {
     // TODO: Save to NBT
     private var last: List<UUID> = Lists.newArrayList()
 
-    override fun update() {
-        val spell = this.spell
+    override fun update(spell: SpellStack?): Boolean {
         if(spell != null) {
         
             val type = spell.spell.type
             
-            val targets = world?.getEntities(spell.spell.affects(), range) {
-                t -> type == Spell.Type.TICK || last.contains(t.uuid)
+            val targets = world?.getEntities(spell.spell.affects().java, range) {
+                t -> type == Spell.Type.TICK || !last.contains(t.uuid)
             }?.stream() ?: Stream.of()
 
             last = spell.cast(targets, null, spellSource).map(LivingEntity::getUuid)
+            return last.isNotEmpty()
+
         }
+
+        return false
     }
 
 }

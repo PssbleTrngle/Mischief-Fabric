@@ -17,7 +17,7 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.world.World
 
 abstract class SpellableItem(private val material: Spell.Material, settings: Settings = Settings()) :
-    Item(settings.group(Content.GROUP)), ISpellable {
+    Item(settings.group(Content.GROUP).maxCount(1)), ISpellable {
 
     companion object {
         fun setSpell(spell: SpellStack?, item: ItemStack) {

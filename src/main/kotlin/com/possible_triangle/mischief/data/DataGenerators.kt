@@ -3,6 +3,7 @@ package com.possible_triangle.mischief.data
 import com.google.common.collect.Maps
 import com.possible_triangle.mischief.Content
 import com.possible_triangle.mischief.Mischief
+import com.possible_triangle.mischief.block.CarvingTable
 import com.possible_triangle.mischief.block.SpellableBlock
 import com.possible_triangle.mischief.block.Totem
 import net.devtech.arrp.api.RRPCallback
@@ -15,6 +16,7 @@ import net.devtech.arrp.json.blockstate.JVariant
 import net.devtech.arrp.json.models.JModel
 import net.devtech.arrp.json.models.JTextures
 import net.minecraft.block.Block
+import net.minecraft.block.Blocks
 import net.minecraft.item.Item
 import net.minecraft.state.property.Property
 import net.minecraft.util.Identifier
@@ -59,7 +61,7 @@ class DataGenerators : RRPPreGenEntrypoint {
 
         fun flatProperties(block: Block, model: (ModelState) -> JBlockModel): JVariant {
             val props = block.defaultState.properties.toTypedArray()
-            return ModelState.forProperties(*props).fold(variant(), { v, m -> v.put(m.key, model(m))})
+            return ModelState.forProperties(*props).fold(variant(), { v, m -> v.put(m.key, model(m)) })
         }
     }
 
@@ -73,26 +75,50 @@ class DataGenerators : RRPPreGenEntrypoint {
             PACK.addModel(JModel.model(model(totem).toString()), model(totem.asItem()))
 
             SpellableBlock.State.values().forEach {
-                val texture =  model(parent ?: totem).toString()
+                val texture = model(parent ?: totem).toString()
                 val noSpell = it == SpellableBlock.State.NONE
 
                 PACK.addModel(
-                    JModel.model(id("block/totem").toString()).textures(JTextures()
-                        .`var`("texture", texture)
-                        .`var`("glow", if(noSpell) texture else id("block/totem_glow").toString())),
-                    if(noSpell) model(totem) else extend(model(totem), "_${it.asString()}")
+                        JModel.model(id("block/totem").toString()).textures(JTextures()
+                                .`var`("texture", texture)
+                                .`var`("glow", if (noSpell) texture else id("block/totem_glow").toString())),
+                        if (noSpell) model(totem) else extend(model(totem), "_${it.asString()}")
                 )
             }
 
             PACK.addBlockState(
-                state(flatProperties(totem) {
-                    val y = it.get(Totem.FACING).asRotation().toInt()
-                    val state = it.get(SpellableBlock.STATE)
-                    val model = if(state == SpellableBlock.State.NONE) model(totem) else extend(model(totem), "_${state.asString()}")
-                    JBlockModel(model.toString()).y(y)
-                }), id(totem)
+                    state(flatProperties(totem) {
+                        val y = it.get(Totem.FACING).asRotation().toInt()
+                        val state = it.get(SpellableBlock.STATE)
+                        val model = if (state == SpellableBlock.State.NONE) model(totem) else extend(model(totem), "_${state.asString()}")
+                        JBlockModel(model.toString()).y(y)
+                    }), id(totem)
             )
         }
+
+        Content.dreamcatchers.forEach { dreamcatcher ->
+            PACK.addModel(JModel.model(model(dreamcatcher).toString()), model(dreamcatcher.asItem()))
+
+            val texture = model(dreamcatcher).toString()
+            PACK.addModel(JModel.model(id("block/dreamcatcher").toString()).textures(JTextures().`var`("texture", texture)), model(dreamcatcher))
+
+            PACK.addBlockState(
+                    state(flatProperties(dreamcatcher) {
+                        val model = model(dreamcatcher)
+                        JBlockModel(model.toString())
+                    }), id(dreamcatcher)
+            )
+        }
+
+        PACK.addModel(JModel.model(id("block/carving_table_item").toString()), model(Content.CARVING_TABLE.asItem()))
+        PACK.addBlockState(
+                state(flatProperties(Content.CARVING_TABLE) {
+                    val assembled = it.get(CarvingTable.CORNER) != CarvingTable.Corner.NONE
+                    val model = model(if(assembled) Content.CARVING_TABLE else Blocks.BLACKSTONE)
+                    val corner = it.get(CarvingTable.CORNER)
+                    JBlockModel(model.toString()).uvlock().y(corner.rotation.ordinal * 90)
+                }), id(Content.CARVING_TABLE)
+        )
 
     }
 

@@ -59,10 +59,10 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
     }
 
     /**
-     * @return The protected entities
+     * @return The affected entities
      */
-    fun cast(targets: Stream<LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Collection<LivingEntity> {
-        return targets.filter { target -> !cast(target, by, at, type) }.toList()
+    fun cast(targets: Stream<out LivingEntity>, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Collection<LivingEntity> {
+        return targets.filter { target -> cast(target, by, at, type) }.toList()
     }
 
     fun canCast(type: Type?): Boolean {

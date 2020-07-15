@@ -13,11 +13,16 @@ import net.minecraft.util.registry.RegistryKey
 import com.possible_triangle.mischief.spell.Spell.Context
 import com.possible_triangle.mischief.spell.spells.*
 import net.fabricmc.fabric.api.event.world.WorldTickCallback
+import net.minecraft.entity.effect.StatusEffect
+import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.potion.Potions
+import net.minecraft.server.command.EffectCommand
 import org.spongepowered.asm.mixin.Mixin
 import org.spongepowered.asm.mixin.injection.At
 import org.spongepowered.asm.mixin.injection.Inject
 import java.awt.Color
 import java.util.function.Function
+import java.util.stream.Stream
 
 object Spells {
 
@@ -33,6 +38,22 @@ object Spells {
 
     val REFLECT = Registry.register(REGISTRY, "reflect", ReflectProtection())
     val SHIELD = Registry.register(REGISTRY, "shield", ShieldProtection())
+
+    val EFFECTS = listOf(
+            StatusEffects.BLINDNESS,
+            StatusEffects.FIRE_RESISTANCE,
+            StatusEffects.GLOWING,
+            StatusEffects.HUNGER,
+            StatusEffects.INVISIBILITY,
+            StatusEffects.LEVITATION,
+            StatusEffects.MINING_FATIGUE,
+            StatusEffects.NAUSEA,
+            StatusEffects.NIGHT_VISION,
+            StatusEffects.RESISTANCE,
+            StatusEffects.SLOWNESS,
+            StatusEffects.WEAKNESS,
+            StatusEffects.SLOW_FALLING
+    ).map { Registry.register(REGISTRY, Registry.STATUS_EFFECT.getId(it)!!.path, EffectSpell(it)) }
 
     fun attemptCast(ctx: Context): Boolean {
         if(!ctx.spell.spell.affects().isInstance(ctx.target)) return false

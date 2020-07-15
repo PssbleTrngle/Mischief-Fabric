@@ -5,6 +5,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.Vec3d
 import java.awt.Color
 import java.util.*
+import kotlin.reflect.KClass
 
 abstract class Spell(val type: Type, val bad: Boolean = true) {
 
@@ -28,8 +29,8 @@ abstract class Spell(val type: Type, val bad: Boolean = true) {
 
     internal abstract fun apply(ctx: Context)
 
-    open fun affects(): Class<out LivingEntity> {
-        return LivingEntity::class.java
+    open fun affects(): KClass<out LivingEntity> {
+        return LivingEntity::class
     }
 
     val color: Color by lazy {

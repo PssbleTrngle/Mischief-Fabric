@@ -11,6 +11,7 @@ import net.fabricmc.api.Environment
 import net.minecraft.block.Block
 import net.minecraft.block.BlockEntityProvider
 import net.minecraft.block.BlockState
+import net.minecraft.block.BlockWithEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
@@ -27,10 +28,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.BlockView
 import net.minecraft.world.ServerWorldAccess
 import net.minecraft.world.World
+import java.lang.IllegalArgumentException
 import java.util.stream.Stream
 
 abstract class SpellableBlock(private val spellMaterial: Spell.Material, settings: Settings) :
-        Block(settings), ISpellable, BlockEntityProvider {
+        TileHolder(settings), ISpellable {
 
     init {
         defaultState = super.getDefaultState().with(STATE, State.NONE)
@@ -46,7 +48,7 @@ abstract class SpellableBlock(private val spellMaterial: Spell.Material, setting
         companion object {
             fun from(spell: SpellStack?): State {
                 if (spell == null) return NONE
-                return CURSED
+                return if(spell.spell.bad) CURSED else BLESSED
             }
         }
     }
@@ -74,7 +76,9 @@ abstract class SpellableBlock(private val spellMaterial: Spell.Material, setting
     override fun getPickStack(world: BlockView, pos: BlockPos, state: BlockState): ItemStack {
         val stack = super.getPickStack(world, pos, state)
         val spell = getTile(world, pos)?.spell
-        SpellableItem.setSpell(spell, stack)
+        try {
+            SpellableItem.setSpell(spell, stack)
+        } catch (ex: IllegalArgumentException) {}
         return stack
     }
 
@@ -89,8 +93,7 @@ abstract class SpellableBlock(private val spellMaterial: Spell.Material, setting
 
     override fun onUse(state: BlockState, world: World, pos: BlockPos, player: PlayerEntity, hand: Hand, hit: BlockHitResult): ActionResult {
         val tile = getTile(world, pos) ?: return ActionResult.PASS
-        val color = tile.spell?.spell?.color ?: Spells.NONE_COLOR
-        val particle = DustParticleEffect(color.red / 255F, color.blue / 255F, color.green / 255F, 1F)
+        val particle = tile.particleType()
         val range = tile.range
 
         if(world is ServerWorld) {
