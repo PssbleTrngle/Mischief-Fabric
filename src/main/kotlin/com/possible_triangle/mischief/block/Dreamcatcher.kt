@@ -12,9 +12,10 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.world.BlockView
 
-class Dreamcatcher(material: Spell.Material) : SpellableBlock(material, Settings.of(Material.WOOL).noCollision().nonOpaque()) {
+class Dreamcatcher(material: Spell.Material) : SpellableBlock(material, Settings.of(MATERIAL).noCollision().nonOpaque()) {
 
     companion object {
+        val MATERIAL = Material.Builder(MaterialColor.WEB).notSolid().build()
         val SHAPE = createCuboidShape(1.0, 1.0, 1.0, 15.0, 15.0, 15.0)!!
     }
 
@@ -28,10 +29,6 @@ class Dreamcatcher(material: Spell.Material) : SpellableBlock(material, Settings
 
     override fun createBlockEntity(world: BlockView): BlockEntity? {
         return DreamcatcherTile()
-    }
-
-    override fun isTranslucent(state: BlockState, world: BlockView, pos: BlockPos): Boolean {
-        return true
     }
 
 }

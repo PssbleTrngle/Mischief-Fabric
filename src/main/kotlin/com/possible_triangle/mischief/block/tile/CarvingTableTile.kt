@@ -53,7 +53,7 @@ class CarvingTableTile : SharedInventory<CarvingInventory>(Content.CARVING_TABLE
 
         fun destroyTable(world: WorldAccess, pos: BlockPos) {
             val master = CarvingTable.getTile(world, pos)?.master ?: return
-            corners.forEach { (_, offset) ->
+            corners.filter { it != pos } .forEach { (_, offset) ->
                 world.setBlockState(master.subtract(offset), Blocks.AIR.defaultState, 3)
             }
         }

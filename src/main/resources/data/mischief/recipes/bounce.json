@@ -1,0 +1,15 @@
+{
+  "type": "mischief:spell",
+  "spell": "minecraft:bounce",
+  "ingredients": [
+    {
+      "item": "rabbit_foot"
+    },
+    {
+      "item": "rabbit_foot"
+    },
+    {
+      "item": "slime_ball"
+    }
+  ]
+}

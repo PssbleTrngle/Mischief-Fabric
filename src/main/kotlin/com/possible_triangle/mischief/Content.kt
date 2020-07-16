@@ -1,16 +1,16 @@
 package com.possible_triangle.mischief
 
-import com.possible_triangle.mischief.block.CarvingTable
-import com.possible_triangle.mischief.block.Dreamcatcher
-import com.possible_triangle.mischief.block.SpellableBlock
-import com.possible_triangle.mischief.block.Totem
+import com.possible_triangle.mischief.block.*
 import com.possible_triangle.mischief.block.tile.CarvingTableTile
 import com.possible_triangle.mischief.block.tile.DreamcatcherTile
+import com.possible_triangle.mischief.block.tile.InfuserTile
 import com.possible_triangle.mischief.block.tile.TotemTile
 import com.possible_triangle.mischief.item.Powder
 import com.possible_triangle.mischief.item.SpellableBlockItem
 import com.possible_triangle.mischief.recipe.CarvingRecipe
+import com.possible_triangle.mischief.recipe.SpellRecipe
 import com.possible_triangle.mischief.recipe.serializer.CarvingRecipeSerializer
+import com.possible_triangle.mischief.recipe.serializer.SpellRecipeSerializer
 import com.possible_triangle.mischief.spell.Spell.Material
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.block.Block
@@ -48,6 +48,8 @@ object Content {
     val COSMIC_DREAMCATCHER = registerSpellableBlock(id("cosmic_dreamcatcher"), Dreamcatcher(Material(2, 3)))
     val dreamcatchers = listOf(COSMIC_DREAMCATCHER)
 
+    val INFUSER = registerBlock(id("infuser"), Infuser(), { b -> BlockItem(b, Item.Settings().group(GROUP)) })
+
     val TOTEM_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("totem"),
             BlockEntityType.Builder.create(Supplier { TotemTile() }, *totems.keys.toTypedArray()).build(null))!!
 
@@ -57,8 +59,14 @@ object Content {
     val CARVING_TABLE_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("carving_table"),
             BlockEntityType.Builder.create(Supplier { CarvingTableTile() }, CARVING_TABLE).build(null))!!
 
+    val INFUSER_TILE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, id("infuser"),
+            BlockEntityType.Builder.create(Supplier { InfuserTile() }, INFUSER).build(null))!!
+
     val CARVING = Registry.register(Registry.RECIPE_TYPE, id("carving"), object : RecipeType<CarvingRecipe> {})
-    val CARVING_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, id("carving"), CarvingRecipeSerializer())
+    val CARVING_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, id("carving"), CarvingRecipeSerializer())!!
+
+    val SPELL_RECIPE_TYPE = Registry.register(Registry.RECIPE_TYPE, id("spell"), object : RecipeType<SpellRecipe> {})
+    val SPELL_RECIPE_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, id("spell"), SpellRecipeSerializer())!!
 
     private fun <B : SpellableBlock> registerSpellableBlock(id: Identifier, block: B): B {
         return registerBlock(id, block, { b -> SpellableBlockItem(b) })

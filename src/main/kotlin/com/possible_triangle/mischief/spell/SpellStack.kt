@@ -1,5 +1,6 @@
 package com.possible_triangle.mischief.spell
 
+import com.google.gson.JsonObject
 import net.minecraft.entity.LivingEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.network.ServerPlayerEntity
@@ -10,9 +11,10 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 import kotlin.streams.toList
 import com.possible_triangle.mischief.spell.Spell.Type
+import net.minecraft.network.PacketByteBuf
 import net.minecraft.server.world.ServerWorld
 
-class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0, val piercing: Boolean = false) {
+class SpellStack(val spell: Spell, val power: Int, val owner: UUID? = null, private var cooldown: Int = 0, val piercing: Boolean = false) {
 
     val rank: Int by lazy {
         spell.getRank(this)
@@ -32,6 +34,15 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
             val piercing = tag.getBoolean("piercing")
             return SpellStack(spell, power, owner, cooldown, piercing)
         }
+
+        fun read(buf: PacketByteBuf): SpellStack? {
+            val power = buf.readInt()
+            val cooldown = buf.readInt()
+            val spell = Spells.REGISTRY.get(Identifier(buf.readString())) ?: return null
+            val piercing = buf.readBoolean()
+            val owner = if (buf.readBoolean()) buf.readUuid() else null
+            return SpellStack(spell, power, owner, cooldown, piercing)
+        }
     }
 
     fun serialize(): CompoundTag {
@@ -40,20 +51,29 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
         tag.putInt("cooldown", cooldown)
         tag.putString("id", Spells.REGISTRY.getId(spell)!!.toString())
         tag.putBoolean("piercing", piercing)
-        if(owner != null) tag.putUuid("owner", owner)
+        if (owner != null) tag.putUuid("owner", owner)
         return tag
     }
 
+    fun write(buf: PacketByteBuf) {
+        buf.writeInt(power)
+        buf.writeInt(cooldown)
+        buf.writeString(Spells.REGISTRY.getId(spell)!!.toString())
+        buf.writeBoolean(piercing)
+        buf.writeBoolean(owner != null)
+        if (owner != null) buf.writeUuid(owner)
+    }
+
     fun cast(target: LivingEntity, by: ServerPlayerEntity? = null, at: Vec3d? = null, type: Type? = null): Boolean {
-        if(!canCast(type)) return false
+        if (!canCast(type)) return false
 
         val world = by?.world ?: target.world
-        if(world !is ServerWorld) return false
+        if (world !is ServerWorld) return false
 
         val ctx = Spell.Context(world, target, this, at, by?.uuid)
         return if (Spells.attemptCast(ctx)) {
             val cooldown = totalCooldown
-            if(cooldown > 0) this.cooldown = cooldown
+            if (cooldown > 0) this.cooldown = cooldown
             true
         } else false
     }
@@ -70,7 +90,7 @@ class SpellStack(val spell : Spell, val power: Int, val owner: UUID? = null, pri
     }
 
     fun tick(): Boolean {
-        return if(cooldown > 0) {
+        return if (cooldown > 0) {
             cooldown--
             true
         } else false

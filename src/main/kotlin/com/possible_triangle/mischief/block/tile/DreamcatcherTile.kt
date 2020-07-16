@@ -11,7 +11,9 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
+import java.util.stream.Collectors
 import java.util.stream.Stream
+import java.util.stream.StreamSupport
 
 class DreamcatcherTile : SpellableTile(Content.DREAMCATCHER_TILE_TYPE) {
 
@@ -22,9 +24,10 @@ class DreamcatcherTile : SpellableTile(Content.DREAMCATCHER_TILE_TYPE) {
     }
 
     fun getTargets(): List<ServerPlayerEntity> {
-        return BlockPos.iterate(blockRange.minX, blockRange.minY, blockRange.minZ, blockRange.maxX, blockRange.maxY, blockRange.maxZ).map {
-            return getOwner(it)
-        }
+        return StreamSupport.stream(BlockPos.iterate(blockRange.minX, blockRange.minY, blockRange.minZ, blockRange.maxX, blockRange.maxY, blockRange.maxZ).spliterator(), false).map {
+            val owners = getOwner(it)
+            owners.stream()
+        }. flatMap { s -> s }.collect(Collectors.toList())
     }
 
     override fun update(spell: SpellStack?): Boolean {
